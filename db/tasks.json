@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    {
+      "description": "My first workshop with fetch",
+      "status": "open",
+      "addedDate": "2020-05-20T10:51:32.000Z",
+      "id": "1da4ad78-cbbf-4fcd-8808-94364469f17c",
+      "title": "Create ToDo App"
+    },
+    {
+      "description": "",
+      "status": "open",
+      "addedDate": "2020-05-20T10:52:32.000Z",
+      "id": "1da4ad78-cbbf-4fcd-8821-94364469f17c",
+      "title": "My second tasks"
+    }
+  ]
+}
