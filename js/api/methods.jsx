@@ -8,6 +8,7 @@ const getTasks = (successCallback) => {
   })
     .then((r) => r.json())
     .then((data) => {
+      console.log(data);
       if (data.error === false && typeof successCallback === "function") {
         successCallback(data.data);
       }
@@ -25,8 +26,18 @@ const addTask = (data) => {
     },
   })
     .then((res) => res.json())
-    .then(console.warn("api add method fired"))
     .catch((err) => console.error(err));
 };
 
-export { getTasks, addTask };
+const removeTask = (id) => {
+  fetch(`${API_URL}/tasks/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: API_KEY,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+export { getTasks, addTask, removeTask };
