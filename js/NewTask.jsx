@@ -1,5 +1,5 @@
 import React from "react";
-import { addTask } from "./api/methods";
+import { addTask } from "./api/taskMethods";
 
 const NewTask = () => {
   const handleAddTask = (e) => {

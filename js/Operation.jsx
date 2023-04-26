@@ -1,12 +1,17 @@
 import React from "react";
 
-const Operation = () => {
+const Operation = ({ operation }) => {
+  const hourFormatter = (timeInMinutes) => {
+    const hours = Math.floor(timeInMinutes / 60);
+    const minutes = timeInMinutes % 60;
+    return `${hours}h ${minutes}m`;
+  };
+
   return (
     <ul>
       <li>
-        This is one Operation
-        <p>Op Description</p>
-        <p>Op Time</p>
+        <p>{operation.description}</p>
+        <p>{hourFormatter(operation.timeSpent)}</p>
         <button>Add Time</button>
         <button>Delete</button>
       </li>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Operation from "./Operation";
-import { removeTask } from "./api/methods";
+import { removeTask } from "./api/taskMethods";
 import { getOperations } from "./api/operationMethods";
 
-const Item = ({ task }) => {
+const Task = ({ task }) => {
   const [finished, setFinished] = useState(false);
   const [operations, setOperations] = useState([]);
 
@@ -17,10 +17,11 @@ const Item = ({ task }) => {
     removeTask(task.id);
   };
 
-  const handleAddOperation = () => {
+  const handleAddOperation = (e) => {
     e.preventDefault();
     console.log("OPERATION ADDED"); //DEBUG
     setOperations((prev) => [...prev, "Op test"]);
+    console.log(operations); //DEBUG
   };
 
   return (
@@ -30,9 +31,13 @@ const Item = ({ task }) => {
       <button onClick={handleAddOperation}>Add operation</button>
       <button onClick={() => setFinished(true)}>Finish</button>
       <button onClick={handleRemove}>delete</button>
-      {operations.length ? <Operation /> : null}
+      {operations.length
+        ? operations.map((operation) => {
+            return <Operation operation={operation} key={operation.id} />;
+          })
+        : null}
     </li>
   );
 };
 
-export default Item;
+export default Task;
