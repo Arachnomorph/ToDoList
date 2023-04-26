@@ -2,15 +2,14 @@ import React from "react";
 import { addTask } from "./api/methods";
 
 const NewTask = () => {
-  const test = {
-    title: "test title",
-    description: "test description",
-    status: "test status",
-  };
-
   const handleAddTask = (e) => {
     e.preventDefault();
-    addTask(test);
+    const formData = new FormData(e.target);
+    addTask({
+      title: formData.get("title"),
+      description: formData.get("description"),
+      status: "open",
+    });
   };
 
   return (

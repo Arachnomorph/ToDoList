@@ -8,7 +8,7 @@ const getTasks = (successCallback) => {
   })
     .then((r) => r.json())
     .then((data) => {
-      console.log(data);
+      console.log(data); //DEBUG
       if (data.error === false && typeof successCallback === "function") {
         successCallback(data.data);
       }

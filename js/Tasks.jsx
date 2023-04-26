@@ -6,7 +6,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    // console.log("ile razy?");
+    console.log("ile razy?"); //DEBUG
     getTasks(setTasks);
   }, []);
 
