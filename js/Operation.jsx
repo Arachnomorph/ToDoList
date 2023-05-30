@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { deleteOperation } from "./api/operationMethods";
 
-const Operation = ({ operation }) => {
+const Operation = ({ operation, handleDeleteOperation }) => {
   const [time, setTime] = useState(0);
 
   const handleAddTime = () => {};
@@ -11,7 +12,10 @@ const Operation = ({ operation }) => {
     return `${hours}h ${minutes}m`;
   };
 
-  const handleDeleteOperation = () => {};
+  const deleteOperation = (e) => {
+    e.preventDefault();
+    handleDeleteOperation(operation.id);
+  };
 
   return (
     <ul>
@@ -19,7 +23,7 @@ const Operation = ({ operation }) => {
         <p>{operation.description}</p>
         <p>{hourFormatter(operation.timeSpent)}</p>
         <button onClick={handleAddTime}>Add Time</button>
-        <button onClick={handleDeleteOperation}>Delete</button>
+        <button onClick={deleteOperation}>Delete</button>
       </li>
     </ul>
   );

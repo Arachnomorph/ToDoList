@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Operation from "./Operation";
 import { removeTask } from "./api/taskMethods";
-import { addOperation, getOperations } from "./api/operationMethods";
+import {
+  addOperation,
+  getOperations,
+  deleteOperation,
+} from "./api/operationMethods";
 import OperationAdder from "./OperationAdder";
 
 const Task = ({ task }) => {
@@ -25,6 +29,11 @@ const Task = ({ task }) => {
     setOperationAdderVisible((prev) => !prev);
   };
 
+  const handleDeleteOperation = (operationId) => {
+    deleteOperation(operationId);
+    getOperations(task.id, setOperations);
+  };
+
   const showOperationAdd = (e) => {
     e.preventDefault();
     setOperationAdderVisible((prev) => !prev);
@@ -44,7 +53,13 @@ const Task = ({ task }) => {
       ) : null}
       {operations.length
         ? operations.map((operation) => {
-            return <Operation operation={operation} key={operation.id} />;
+            return (
+              <Operation
+                operation={operation}
+                handleDeleteOperation={handleDeleteOperation}
+                key={operation.id}
+              />
+            );
           })
         : null}
     </li>

@@ -35,4 +35,15 @@ const addOperation = function (taskId, data, successCallback) {
     .catch((err) => console.log(err));
 };
 
-export { getOperations, addOperation };
+const deleteOperation = function (operationId) {
+  fetch(`${API_URL}/operations/${operationId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: API_KEY,
+    },
+  })
+    .then((res) => res.json())
+    .then((err) => console.log(err));
+};
+
+export { getOperations, addOperation, deleteOperation };
