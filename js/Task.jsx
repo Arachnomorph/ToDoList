@@ -30,7 +30,9 @@ const Task = ({ task }) => {
   };
 
   const handleDeleteOperation = (operationId) => {
+    console.log(operations); //DEBUG
     deleteOperation(operationId);
+    console.log(operations); //DEBUG
     getOperations(task.id, setOperations);
   };
 

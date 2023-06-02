@@ -9,7 +9,6 @@ const OperationAdder = ({ task, handleAddOperation }) => {
       description: operationName,
       timeSpent: 0,
     };
-    console.log("OPERATION ADDED"); //DEBUG
     handleAddOperation(task, data);
   };
 

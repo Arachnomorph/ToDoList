@@ -43,7 +43,12 @@ const deleteOperation = function (operationId) {
     },
   })
     .then((res) => res.json())
-    .then((err) => console.log(err));
+    .then((data) => {
+      if (data.error === false && typeof successCallback === "function") {
+        successCallback(data.data);
+      }
+    })
+    .catch((err) => console.log(err));
 };
 
 export { getOperations, addOperation, deleteOperation };
