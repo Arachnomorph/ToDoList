@@ -8,7 +8,6 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect fired"); //DEBUG
     getTasks(setTasks);
   }, []);
 

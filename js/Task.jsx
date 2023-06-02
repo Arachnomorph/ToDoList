@@ -30,13 +30,11 @@ const Task = ({ task }) => {
   };
 
   const handleDeleteOperation = (operationId) => {
-    console.log(operations); //DEBUG
     deleteOperation(operationId);
-    console.log(operations); //DEBUG
     getOperations(task.id, setOperations);
   };
 
-  const showOperationAdd = (e) => {
+  const showOperationAdder = (e) => {
     e.preventDefault();
     setOperationAdderVisible((prev) => !prev);
   };
@@ -45,7 +43,7 @@ const Task = ({ task }) => {
     <li>
       <h2>{task.title}</h2>
       <h3>{task.description}</h3>
-      <button onClick={showOperationAdd}>
+      <button onClick={showOperationAdder}>
         {operationAdderVisible ? "Cancel" : "Add operation"}
       </button>
       <button onClick={() => setFinished(true)}>Finish</button>
@@ -53,17 +51,19 @@ const Task = ({ task }) => {
       {operationAdderVisible ? (
         <OperationAdder task={task} handleAddOperation={handleAddOperation} />
       ) : null}
-      {operations.length
-        ? operations.map((operation) => {
-            return (
-              <Operation
-                operation={operation}
-                handleDeleteOperation={handleDeleteOperation}
-                key={operation.id}
-              />
-            );
-          })
-        : null}
+      {operations.length ? (
+        operations.map((operation) => {
+          return (
+            <Operation
+              operation={operation}
+              handleDeleteOperation={handleDeleteOperation}
+              key={operation.id}
+            />
+          );
+        })
+      ) : (
+        <p>FAIL</p>
+      )}
     </li>
   );
 };

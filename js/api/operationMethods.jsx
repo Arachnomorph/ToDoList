@@ -8,7 +8,6 @@ const getOperations = (taskId, successCallback) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data); //DEBUG
       if (data.error === false && typeof successCallback === "function") {
         successCallback(data.data);
       }
@@ -27,7 +26,6 @@ const addOperation = function (taskId, data, successCallback) {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       if (data.error === false && typeof successCallback === "function") {
         successCallback(data.data);
       }
