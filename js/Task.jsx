@@ -19,7 +19,6 @@ const Task = ({ task }) => {
 
   const handleRemove = (e) => {
     e.preventDefault();
-    console.log(task.id); //DEBUG
     removeTask(task.id);
   };
 

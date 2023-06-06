@@ -33,7 +33,7 @@ const addOperation = function (taskId, data, successCallback) {
     .catch((err) => console.log(err));
 };
 
-const deleteOperation = function (operationId) {
+const deleteOperation = function (operationId, successCallback) {
   fetch(`${API_URL}/operations/${operationId}`, {
     method: "DELETE",
     headers: {
