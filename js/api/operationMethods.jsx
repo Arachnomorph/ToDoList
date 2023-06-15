@@ -27,24 +27,21 @@ const addOperation = function (taskId, data, successCallback) {
     .then((res) => res.json())
     .then((data) => {
       if (data.error === false && typeof successCallback === "function") {
-        successCallback(data.data);
+        successCallback((prev) => prev.concat(data.data));
       }
     })
     .catch((err) => console.log(err));
 };
 
-const deleteOperation = function (operationId, successCallback) {
+const deleteOperation = function (operationId) {
   fetch(`${API_URL}/operations/${operationId}`, {
     method: "DELETE",
     headers: {
       Authorization: API_KEY,
     },
   })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.error === false && typeof successCallback === "function") {
-        successCallback(data.data);
-      }
+    .then((res) => {
+      return res.json();
     })
     .catch((err) => console.log(err));
 };

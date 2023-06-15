@@ -24,13 +24,12 @@ const Task = ({ task }) => {
 
   const handleAddOperation = (task, data) => {
     addOperation(task.id, data, setOperations);
-    getOperations(task.id, setOperations);
     setOperationAdderVisible((prev) => !prev);
   };
 
   const handleDeleteOperation = (operationId) => {
     deleteOperation(operationId);
-    getOperations(task.id, setOperations);
+    setOperations((prev) => prev.filter((op) => op.id !== operationId));
   };
 
   const showOperationAdder = (e) => {
