@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Operation from "./Operation";
-import { removeTask } from "./api/taskMethods";
 import {
   addOperation,
   getOperations,
@@ -8,7 +7,7 @@ import {
 } from "./api/operationMethods";
 import OperationAdder from "./OperationAdder";
 
-const Task = ({ task }) => {
+const Task = ({ task, handleRemoveTask }) => {
   const [finished, setFinished] = useState(false);
   const [operations, setOperations] = useState([]);
   const [operationAdderVisible, setOperationAdderVisible] = useState(false);
@@ -19,7 +18,7 @@ const Task = ({ task }) => {
 
   const handleRemove = (e) => {
     e.preventDefault();
-    removeTask(task.id);
+    handleRemoveTask(task.id);
   };
 
   const handleAddOperation = (task, data) => {
@@ -49,19 +48,17 @@ const Task = ({ task }) => {
       {operationAdderVisible ? (
         <OperationAdder task={task} handleAddOperation={handleAddOperation} />
       ) : null}
-      {operations.length ? (
-        operations.map((operation) => {
-          return (
-            <Operation
-              operation={operation}
-              handleDeleteOperation={handleDeleteOperation}
-              key={operation.id}
-            />
-          );
-        })
-      ) : (
-        <p>FAIL</p>
-      )}
+      {operations.length
+        ? operations.map((operation) => {
+            return (
+              <Operation
+                operation={operation}
+                handleDeleteOperation={handleDeleteOperation}
+                key={operation.id}
+              />
+            );
+          })
+        : null}
     </li>
   );
 };
