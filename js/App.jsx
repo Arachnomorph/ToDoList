@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import NewTask from "./NewTask";
 import Task from "./Task";
-import { getTasks, removeTask } from "./api/taskMethods";
+import { getTasks, removeTask, addTask } from "./api/taskMethods";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,6 +11,11 @@ const App = () => {
     getTasks(setTasks);
   }, []);
 
+  const handleAddTask = function (data) {
+    addTask(data);
+    getTasks(setTasks);
+  };
+
   const handleRemoveTask = function (taskId) {
     removeTask(taskId);
     setTasks((prev) => prev.filter((task) => task.id !== taskId));
@@ -18,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <NewTask />
+      <NewTask handleAddTask={handleAddTask} />
       <ul>
         {tasks.map((task, i) => (
           <Task handleRemoveTask={handleRemoveTask} key={i} task={task} />

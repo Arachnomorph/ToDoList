@@ -46,7 +46,11 @@ const Task = ({ task, handleRemoveTask }) => {
       <button onClick={() => setFinished(true)}>Finish</button>
       <button onClick={handleRemove}>delete</button>
       {operationAdderVisible ? (
-        <OperationAdder task={task} handleAddOperation={handleAddOperation} />
+        <OperationAdder
+          task={task}
+          handleAddOperation={handleAddOperation}
+          setOperations={setOperations}
+        />
       ) : null}
       {operations.length
         ? operations.map((operation) => {

@@ -33,6 +33,19 @@ const addOperation = function (taskId, data, successCallback) {
     .catch((err) => console.log(err));
 };
 
+const updateOperation = function (operationId, data) {
+  fetch(`${API_URL}/operations/${operationId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      Authorization: API_KEY,
+      "Content-type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 const deleteOperation = function (operationId) {
   fetch(`${API_URL}/operations/${operationId}`, {
     method: "DELETE",
@@ -46,4 +59,4 @@ const deleteOperation = function (operationId) {
     .catch((err) => console.log(err));
 };
 
-export { getOperations, addOperation, deleteOperation };
+export { getOperations, updateOperation, addOperation, deleteOperation };

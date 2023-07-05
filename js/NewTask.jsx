@@ -1,22 +1,22 @@
 import React from "react";
-import { addTask } from "./api/taskMethods";
 
-const NewTask = () => {
-  const handleAddTask = (e) => {
+const NewTask = ({ handleAddTask }) => {
+  const addTask = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    addTask({
+    handleAddTask({
       title: formData.get("title"),
       description: formData.get("description"),
       status: "open",
     });
+    e.target.reset();
   };
 
   return (
     <div>
       <div>
         <h1>New task</h1>
-        <form onSubmit={handleAddTask}>
+        <form onSubmit={addTask}>
           <div>
             <input type="text" name="title" placeholder="Title" />
           </div>
