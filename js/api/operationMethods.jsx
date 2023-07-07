@@ -33,16 +33,23 @@ const addOperation = function (taskId, data, successCallback) {
     .catch((err) => console.log(err));
 };
 
-const updateOperation = function (operationId, data) {
+const updateOperation = function (operationId, operationData, successCallback) {
   fetch(`${API_URL}/operations/${operationId}`, {
     method: "PUT",
-    body: JSON.stringify(data),
+    body: JSON.stringify(operationData),
     headers: {
       Authorization: API_KEY,
       "Content-type": "application/json",
     },
   })
     .then((res) => res.json())
+    .then((data) => {
+      if (data.error === false && typeof successCallback === "function") {
+        successCallback(data.data.timeSpent);
+        console.log(data.data.timeSpent); //DEBUG
+        console.log(`${API_URL}/operations/${operationId}`); //DEBUG
+      }
+    })
     .catch((err) => console.log(err));
 };
 

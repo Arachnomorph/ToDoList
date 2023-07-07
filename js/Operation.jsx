@@ -3,18 +3,16 @@ import TimeAdder from "./TimeAdder";
 import { updateOperation } from "./api/operationMethods";
 
 const Operation = ({ operation, handleDeleteOperation }) => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(operation.timeSpent);
   const [timeAdderVisible, setTimeAdderVisible] = useState(false);
 
   const handleAddTime = (addedTime) => {
-    setTime((prev) => prev + addedTime);
-    const data = {
+    const operationData = {
       description: operation.description,
-      timeSpent: time,
+      timeSpent: time + addedTime,
     };
-    updateOperation(operation.id, data);
-    setTimeAdderVisible((prev) => !prev);
-    console.log(addedTime);
+    updateOperation(operation.id, operationData, setTime);
+    switchTimeAdderVisibility();
   };
 
   const hourFormatter = (timeInMinutes) => {

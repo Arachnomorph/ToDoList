@@ -10,7 +10,7 @@ const TimeAdder = ({ handleAddTime }) => {
 
   return (
     <form onSubmit={addTime}>
-      <input name="time" type="number" />
+      <input name="time" type="number" placeholder="Time spent in minutes" />
       <button type="submit">Add</button>
     </form>
   );
