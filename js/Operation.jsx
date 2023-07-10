@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TimeAdder from "./TimeAdder";
 import { updateOperation } from "./api/operationMethods";
 
-const Operation = ({ operation, handleDeleteOperation }) => {
+const Operation = ({ taskStatus, operation, handleDeleteOperation }) => {
   const [time, setTime] = useState(operation.timeSpent);
   const [timeAdderVisible, setTimeAdderVisible] = useState(false);
 
@@ -42,7 +42,9 @@ const Operation = ({ operation, handleDeleteOperation }) => {
           </>
         ) : (
           <>
-            <button onClick={switchTimeAdderVisibility}>Add Time</button>
+            {taskStatus === "closed" ? null : (
+              <button onClick={switchTimeAdderVisibility}>Add Time</button>
+            )}
             <button onClick={deleteOperation}>Delete</button>{" "}
           </>
         )}

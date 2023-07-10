@@ -5,10 +5,11 @@ import {
   getOperations,
   deleteOperation,
 } from "./api/operationMethods";
+import { updateTask } from "./api/taskMethods";
 import OperationAdder from "./OperationAdder";
 
 const Task = ({ task, handleRemoveTask }) => {
-  const [finished, setFinished] = useState(false);
+  const [status, setStatus] = useState(task.status);
   const [operations, setOperations] = useState([]);
   const [operationAdderVisible, setOperationAdderVisible] = useState(false);
 
@@ -19,6 +20,16 @@ const Task = ({ task, handleRemoveTask }) => {
   const handleRemove = (e) => {
     e.preventDefault();
     handleRemoveTask(task.id);
+  };
+
+  const handleFinish = (e) => {
+    e.preventDefault();
+    const data = {
+      title: task.title,
+      description: task.description,
+      status: "closed",
+    };
+    updateTask(task.id, data, setStatus);
   };
 
   const handleAddOperation = (task, data) => {
@@ -40,11 +51,18 @@ const Task = ({ task, handleRemoveTask }) => {
     <li>
       <h2>{task.title}</h2>
       <h3>{task.description}</h3>
-      <button onClick={showOperationAdder}>
-        {operationAdderVisible ? "Cancel" : "Add operation"}
-      </button>
-      <button onClick={() => setFinished(true)}>Finish</button>
-      <button onClick={handleRemove}>delete</button>
+      {status === "open" ? (
+        <>
+          <button onClick={showOperationAdder}>
+            {operationAdderVisible ? "Cancel" : "Add operation"}
+          </button>{" "}
+          <button onClick={handleFinish}>Finish</button>{" "}
+        </>
+      ) : null}
+
+      {status === "closed" && !operations.length ? (
+        <button onClick={handleRemove}>delete</button>
+      ) : null}
       {operationAdderVisible ? (
         <OperationAdder
           task={task}
@@ -56,6 +74,7 @@ const Task = ({ task, handleRemoveTask }) => {
         ? operations.map((operation) => {
             return (
               <Operation
+                taskStatus={status}
                 operation={operation}
                 handleDeleteOperation={handleDeleteOperation}
                 key={operation.id}
