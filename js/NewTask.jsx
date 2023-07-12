@@ -1,4 +1,12 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledTitle = styled.h1`
+  font-size: 2.5rem;
+  color: #212529;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+`;
 
 const NewTask = ({ handleAddTask }) => {
   const addTask = (e) => {
@@ -13,20 +21,18 @@ const NewTask = ({ handleAddTask }) => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>New task</h1>
-        <form onSubmit={addTask}>
-          <div>
-            <input type="text" name="title" placeholder="Title" />
-          </div>
-          <div>
-            <input type="text" name="description" placeholder="Description" />
-          </div>
-          <button type="submit">Add task</button>
-        </form>
-      </div>
-    </div>
+    <>
+      <StyledTitle>New task</StyledTitle>
+      <form onSubmit={addTask}>
+        <div>
+          <input type="text" name="title" placeholder="Title" />
+        </div>
+        <div>
+          <input type="text" name="description" placeholder="Description" />
+        </div>
+        <button type="submit">Add task</button>
+      </form>
+    </>
   );
 };
 
